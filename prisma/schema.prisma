@@ -14,7 +14,7 @@ datasource db {
 }
 
 model ServiceOffering {
-  id          String    @id @default(uuid())
+  id          String    @id
   name        String    @unique
   description String
   status      String    @default("ACTIVE") // ACTIVE/INACTIVE
