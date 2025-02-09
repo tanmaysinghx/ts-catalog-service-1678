@@ -1,5 +1,5 @@
 import express from 'express';
-// import { transactionIdMiddleware } from './middleware/transactionIdMiddleware';
+import { transactionIdMiddleware } from './middleware/transactionIdMiddleware';
 import cors from 'cors';
 import { loggerConsole } from './middleware/loggerConsole';
 import healthCheckRoutes from './routes/healthCheckRoutes';
@@ -7,7 +7,7 @@ import catalogRoutes from './routes/catalogRoutes';
 
 const app = express();
 
-//app.use(transactionIdMiddleware);
+app.use(transactionIdMiddleware);
 
 app.use(cors({
   origin: '*',

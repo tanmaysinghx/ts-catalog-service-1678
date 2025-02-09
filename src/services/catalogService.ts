@@ -19,6 +19,12 @@ interface ApproveServiceRequestInput {
     comment?: string;
 }
 
+interface GetRequestsByOfferingInput {
+    offeringId: string;
+    page?: number;
+    size?: number;
+}
+
 export const createServiceOffering = async (
     input: CreateServiceOfferingInput
 ): Promise<ServiceOffering> => {
@@ -62,11 +68,11 @@ export const submitServiceRequest = async (
     const customId = await generateCustomId('REQ', 10);
     return await prisma.serviceRequest.create({
         data: {
-            id: customId, 
+            id: customId,
             offeringId: input.offeringId,
             requesterId: input.requesterId,
             comments: input.comments,
-            status: 'PENDING', 
+            status: 'PENDING',
         },
     });
 };
@@ -93,4 +99,22 @@ export const approveServiceRequest = async (
                 : existingRequest.comments,
         },
     });
+};
+
+export const getRequestsByOffering = async ({
+    offeringId,
+    page = 1,
+    size = 10,
+}: GetRequestsByOfferingInput) => {
+    const skip = (page - 1) * size;
+    const [requests, total] = await prisma.$transaction([
+        prisma.serviceRequest.findMany({
+            where: { offeringId },
+            skip,
+            take: size,
+            orderBy: { createdAt: 'desc' }, 
+        }),
+        prisma.serviceRequest.count({ where: { offeringId } }),
+    ]);
+    return { requests, total, page, size };
 };

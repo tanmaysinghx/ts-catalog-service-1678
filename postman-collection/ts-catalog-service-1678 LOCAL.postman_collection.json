@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "5677ce76-a49e-4a2e-bf75-918b062108d4",
+		"name": "ts-catalog-service-1678 LOCAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15979674"
+	},
+	"item": [
+		{
+			"name": "Create Catalog Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Citrix Software\",\r\n    \"description\": \"Citrix Software for Remote connection to client's network.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/create-catalog-item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"create-catalog-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Catalog Item Request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YTgwODVmYyIsInJvbGVJZCI6IjAwMDUiLCJlbWFpbCI6InRhbm1heXNpbmdoeEBnbWFpbC5jb20iLCJpYXQiOjE3MzkxMjA3NTAsImV4cCI6MTczOTEyMTY1MH0.c-big1wlFxDPxM3DmcvMw6b1ua6ChmURoC5KX_EubtI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offeringId\": \"CATALOG-896643\",\r\n    \"comments\": \"Need VPN access for remote work.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/create-catalog-item-request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"create-catalog-item-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Catalog Requests",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQ0NTQxZiIsInJvbGVJZCI6IjAwMDEiLCJlbWFpbCI6InN1cGVydXNlckBnbWFpbC5jb20iLCJpYXQiOjE3MzkxMjEwODUsImV4cCI6MTczOTEyMTk4NX0.OqRlw-XfefPF6zRXRFI1hjomVHyyUUQiBwSN5FzR7uI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"Access granted as per policy.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/requests/REQ-0001968691/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"requests",
+						"REQ-0001968691",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Catalog Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQ0NTQxZiIsInJvbGVJZCI6IjAwMDEiLCJlbWFpbCI6InN1cGVydXNlckBnbWFpbC5jb20iLCJpYXQiOjE3MzkwNDIzMDMsImV4cCI6MTczOTA0MzIwM30.4fgXptiKsbc4XbDYgk8B_E5pkg28GGgf9sm0sBJj_X8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offeringId\": \"CATALOG-896643\",\r\n    \"comments\": \"Need VPN access for remote work.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/get-all-catalog-items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"get-all-catalog-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Catalog Requests",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQ0NTQxZiIsInJvbGVJZCI6IjAwMDEiLCJlbWFpbCI6InN1cGVydXNlckBnbWFpbC5jb20iLCJpYXQiOjE3MzkwNDIzMDMsImV4cCI6MTczOTA0MzIwM30.4fgXptiKsbc4XbDYgk8B_E5pkg28GGgf9sm0sBJj_X8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offeringId\": \"CATALOG-06181298\",\r\n    \"comments\": \"Need VPN access for remote work.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/offerings/CATALOG-896643/requests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"offerings",
+						"CATALOG-896643",
+						"requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Catalog Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQ0NTQxZiIsInJvbGVJZCI6IjAwMDEiLCJlbWFpbCI6InN1cGVydXNlckBnbWFpbC5jb20iLCJpYXQiOjE3MzkwNDIzMDMsImV4cCI6MTczOTA0MzIwM30.4fgXptiKsbc4XbDYgk8B_E5pkg28GGgf9sm0sBJj_X8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"offeringId\": \"CATALOG-06181298\",\r\n    \"comments\": \"Need VPN access for remote work.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1678/v2/api/catalog/search-catalog-items?name=citrix",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1678",
+					"path": [
+						"v2",
+						"api",
+						"catalog",
+						"search-catalog-items"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "citrix"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
