@@ -13,6 +13,12 @@ interface SubmitServiceRequestInput {
     comments?: string;
 }
 
+interface ApproveServiceRequestInput {
+    requestId: string;
+    approvedBy: string;
+    comment?: string;
+}
+
 export const createServiceOffering = async (
     input: CreateServiceOfferingInput
 ): Promise<ServiceOffering> => {
@@ -26,17 +32,65 @@ export const createServiceOffering = async (
     });
 };
 
+export const getOfferingsList = async (): Promise<ServiceOffering[]> => {
+    return await prisma.serviceOffering.findMany({
+        where: {
+            status: 'ACTIVE',
+        },
+        orderBy: {
+            createdAt: 'desc',
+        },
+    });
+};
+
+export const searchCatalogItemsByName = async (
+    searchTerm: string
+): Promise<ServiceOffering[]> => {
+    return await prisma.serviceOffering.findMany({
+        where: {
+            name: {
+                contains: searchTerm.toLowerCase(),
+            },
+            status: 'ACTIVE',
+        },
+    });
+};
+
 export const submitServiceRequest = async (
     input: SubmitServiceRequestInput
 ): Promise<ServiceRequest> => {
     const customId = await generateCustomId('REQ', 10);
     return await prisma.serviceRequest.create({
         data: {
-            id: customId, // Use custom ID
+            id: customId, 
             offeringId: input.offeringId,
             requesterId: input.requesterId,
             comments: input.comments,
-            status: 'PENDING', // Default status
+            status: 'PENDING', 
+        },
+    });
+};
+
+export const approveServiceRequest = async (
+    input: ApproveServiceRequestInput
+): Promise<ServiceRequest> => {
+    const existingRequest = await prisma.serviceRequest.findUnique({
+        where: { id: input.requestId },
+    });
+    if (!existingRequest) {
+        throw new Error('Service request not found');
+    }
+    if (existingRequest.status !== 'PENDING') {
+        throw new Error('Request is not pending approval');
+    }
+    return await prisma.serviceRequest.update({
+        where: { id: input.requestId },
+        data: {
+            status: 'APPROVED',
+            approvedBy: input.approvedBy,
+            comments: input.comment
+                ? `${existingRequest.comments || ''}\nApproval Note: ${input.comment}`
+                : existingRequest.comments,
         },
     });
 };
